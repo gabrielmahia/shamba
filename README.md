@@ -1,6 +1,6 @@
 # 🌿 Shamba Scan AI
 
-**First Swahili-native crop disease detection app in East Africa.**
+Swahili-native crop disease detection — upload a leaf photo, get a diagnosis and treatment steps in Swahili, grounded in the PlantVillage dataset.
 
 Upload a photo of a diseased plant leaf → AI diagnosis in Swahili → treatment guidance → prevention.
 
