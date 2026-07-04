@@ -31,3 +31,7 @@ For certified diagnosis: contact your local KALRO office.
 
 ---
 *© 2026 Gabriel Mahia / AI Kung Fu LLC · [gabrielmahia.github.io](https://gabrielmahia.github.io)*
+
+## IP & Collaboration
+
+MIT licensed. Feedback via GitHub Issues only — pull requests are not accepted. Full policy: [docs/architecture/IP_POLICY.md](docs/architecture/IP_POLICY.md). Security reports: see [SECURITY.md](SECURITY.md).
