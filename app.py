@@ -102,7 +102,7 @@ Be concise. Use plain Swahili a farmer understands. If image is unclear, say so 
 This is educational demo data — remind user to consult KALRO for official diagnosis."""
 
             payload = {
-                "model": "gemini-2.0-flash",
+                "model": "gemini-3.5-flash",
                 "contents": [{
                     "parts": [
                         {"text": f"Analyze this {crop_choice} leaf for diseases. Respond in the JSON format specified."},
@@ -113,7 +113,7 @@ This is educational demo data — remind user to consult KALRO for official diag
                 "generation_config": {"temperature": 0.1, "max_output_tokens": 600}
             }
 
-            url = f"https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key={API_KEY}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={API_KEY}"
             req = urllib.request.Request(url, data=json.dumps(payload).encode(),
                                           method="POST", headers={"Content-Type": "application/json"})
             with urllib.request.urlopen(req, timeout=30) as r:

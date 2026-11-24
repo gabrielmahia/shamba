@@ -21,7 +21,7 @@ Existing tools (PlantVillage app, Nuru app) are English-only and require app ins
 This is Swahili-first, mobile-optimized, and zero-install.
 
 ## Stack
-- Gemini Vision (gemini-2.0-flash) — multimodal image analysis
+- Gemini Vision (gemini-3.5-flash) — multimodal image analysis
 - Streamlit — zero-install mobile-first deployment
 - MIT License · DEMO data clearly labeled
 
