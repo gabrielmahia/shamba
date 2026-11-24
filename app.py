@@ -7,6 +7,7 @@
 # =============================================================================
 
 import streamlit as st
+import html
 import urllib.request
 import json
 import base64
@@ -36,7 +37,16 @@ st.markdown('<div class="sub">Piga picha ya jani linalougua — tuambie tatizo n
             unsafe_allow_html=True)
 
 # ── API Key ───────────────────────────────────────────────────────────────────
-API_KEY = st.secrets.get("GOOGLE_API_KEY") or st.secrets.get("GEMINI_API_KEY", "")
+def _secret(name):
+    """Read a Streamlit secret, falling back to the environment; never crash when no secrets file exists."""
+    try:
+        v = st.secrets.get(name)
+    except Exception:
+        v = None
+    return v or os.environ.get(name, "")
+
+
+API_KEY = _secret("GOOGLE_API_KEY") or _secret("GEMINI_API_KEY")
 if not API_KEY:
     st.warning(
         "⚠️ **Huduma hii bado haijaungwa na msimamizi.**\n\n"
@@ -113,15 +123,15 @@ This is educational demo data — remind user to consult KALRO for official diag
                 "generation_config": {"temperature": 0.1, "max_output_tokens": 600}
             }
 
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={API_KEY}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent"
             req = urllib.request.Request(url, data=json.dumps(payload).encode(),
-                                          method="POST", headers={"Content-Type": "application/json"})
+                                          method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": API_KEY})
             with urllib.request.urlopen(req, timeout=30) as r:
                 resp = json.loads(r.read())
 
             raw = resp["candidates"][0]["content"]["parts"][0]["text"]
             raw = raw.replace("```json","").replace("```","").strip()
-            result = json.loads(raw)
+            result = {k: html.escape(v) if isinstance(v, str) else v for k, v in json.loads(raw).items()}  # model output goes into unsafe HTML below
 
             # Display result
             sev_color = {"None":"#4caf50","Low":"#8bc34a","Medium":"#ff9800","High":"#f44336"}.get(
